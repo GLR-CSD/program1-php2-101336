@@ -130,7 +130,7 @@ class Album
 
 
     public function __construct(?int    $ID, string $Naam, string $Artiesten, ?string $Release_datum,
-                                ?string $URL, ?string $Afbeelding, string $Prijs)
+                                ?string $URL, ?string $Afbeelding, ?string $Prijs)
 
     {
         $this->ID = $ID;
@@ -168,4 +168,6 @@ class Album
         // Retourneer array met personen
         return $albums;
     }
+
+
 }

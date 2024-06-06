@@ -128,4 +128,44 @@ class Album
         $this->Prijs = $Prijs;
     }
 
+
+    public function __construct(?int    $ID, string $Naam, string $Artiesten, ?string $Release_datum,
+                                ?string $URL, ?string $Afbeelding, string $Prijs)
+
+    {
+        $this->ID = $ID;
+        $this->Naam = $Naam;
+        $this->Artiesten = $Artiesten;
+        $this->Release_datum = $Release_datum;
+        $this->URL = $URL;
+        $this->Afbeelding = $Afbeelding;
+        $this->Prijs = $Prijs;
+    }
+
+
+    public static function getAll(PDO $db): array
+    {
+        // Voorbereiden van de query
+        $stmt = $db->query("SELECT * FROM album");
+
+        // Array om personen op te slaan
+        $albums = [];
+
+        // Itereren over de resultaten en personen toevoegen aan de array
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $album = new Album(
+                $row['ID'],
+                $row['Naam'],
+                $row['Artiesten'],
+                $row['Release_datum'],
+                $row['URL'],
+                $row['Afbeelding'],
+                $row['Prijs']
+            );
+            $albums[] = $album;
+        }
+
+        // Retourneer array met personen
+        return $albums;
+    }
 }
